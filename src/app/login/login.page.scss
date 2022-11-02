@@ -1,13 +1,18 @@
+
 .titulo{
-    text-align: center;
+  text-align: center;
 }
 
-ion-list{
-    padding-bottom: 0;
-    padding-top: 0;
-    }
-
-img{
-    width: 100%;
-    border-radius: 50%;
+.login{
+  padding: 1em;
 }
+.login ion-item{
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.dog{
+  height: 250px;
+}
+
+
