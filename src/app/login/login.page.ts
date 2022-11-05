@@ -14,8 +14,8 @@ export class LoginPage implements OnInit {
   });
 
   mensagensErro = {
-    email: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}, {tipo: 'email', aviso: 'Digite um e-mail'}],
-    senha: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}, {tipo: 'minLength', aviso: 'Deve ter no mínimo 6 dígitos'}],
+    email: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}, {tipo: 'email', aviso: 'Digite um e-mail válido'}],
+    senha: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}, {tipo: 'minLength', aviso: 'O campo deve ter no mínimo 6 dígitos'}],
   };
 
   constructor(private formBuilder: FormBuilder) { }
