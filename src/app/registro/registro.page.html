@@ -6,44 +6,79 @@
 
 <ion-content color="dark">
   <ion-card class="card">
+    <form [formGroup]="registerForm">
+      <ion-item color="medium">
+        <ion-input placeholder="Nome" formControlName="nome"></ion-input>
+      </ion-item>
 
-    <ion-item color="medium">
-      <ion-input placeholder="Nome"></ion-input>
-    </ion-item>
+      <ng-container *ngFor="let erro of mensagensErro.nome">
+        <span class="msg-erro" *ngIf="nome.errors?.[erro.tipo] && (nome.dirty || nome.touched)">
+          {{erro.aviso}}
+        </span>
+      </ng-container>
 
-    <ion-item color="medium">
-      <ion-input placeholder="E-mail" ></ion-input>
-    </ion-item>
+      <ion-item color="medium">
+        <ion-input placeholder="E-mail" formControlName="email"></ion-input>
+      </ion-item>
 
-    <ion-item color="medium">
-      <ion-input placeholder="CPF"></ion-input>
-    </ion-item>
+      <ng-container *ngFor="let erro of mensagensErro.email">
+        <span class="msg-erro" *ngIf="email.errors?.[erro.tipo] && (email.dirty || email.touched)">
+          {{erro.aviso}}
+        </span>
+      </ng-container>
 
-    <ion-item color="medium">
-      <ion-input type="password" placeholder="Senha"></ion-input>
-    </ion-item>
+      <ion-item color="medium">
+        <ion-input placeholder="CPF" formControlName="cpf"></ion-input>
+      </ion-item>
 
-    <ion-item color="medium">
-      <ion-input type="password" placeholder="Confirmar Senha"></ion-input>
-    </ion-item>
+      <ng-container *ngFor="let erro of mensagensErro.cpf">
+        <span class="msg-erro" *ngIf="cpf.errors?.[erro.tipo] && (cpf.dirty || cpf.touched)">
+          {{erro.aviso}}
+        </span>
+      </ng-container>
 
-      <ion-row>
-        <ion-col size="12">
-          <ion-button color="tertiary" shape="round" expand="block">Registrar</ion-button>
+      <ion-item color="medium">
+        <ion-input type="password" placeholder="Senha" formControlName="senha"></ion-input>
+      </ion-item>
+
+      <ng-container *ngFor="let erro of mensagensErro.senha">
+        <span class="msg-erro" *ngIf="senha.errors?.[erro.tipo] && (senha.dirty || senha.touched)">
+          {{erro.aviso}}
+        </span>
+      </ng-container>
+
+      <ion-item color="medium">
+        <ion-input type="password" placeholder="Confirmar Senha" formControlName="confirmeSenha"></ion-input>
+      </ion-item>
+
+      <ng-container *ngFor="let erro of mensagensErro.confirmeSenha">
+        <span class="msg-erro"
+          *ngIf="confirmeSenha.errors?.[erro.tipo] && (confirmeSenha.dirty || confirmeSenha.touched)">
+          {{erro.aviso}}
+        </span>
+      </ng-container>
+    </form>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button color="tertiary" shape="round" expand="block">Registrar</ion-button>
       </ion-col>
-      </ion-row>
+    </ion-row>
 
-      <ion-row>
+    <ion-row>
 
-        <ion-col size="6">
-          <ion-button color="tertiary" shape="round" expand="full"><ion-icon name="arrow-undo"></ion-icon>Voltar</ion-button>
-        </ion-col>
+      <ion-col size="6">
+        <ion-button color="tertiary" shape="round" expand="full">
+          <ion-icon name="arrow-undo"></ion-icon>Voltar
+        </ion-button>
+      </ion-col>
 
-        <ion-col size="6">
-          <ion-button color="tertiary" shape="round" expand="full"><ion-icon name="trash-sharp"></ion-icon>Limpar</ion-button>
-        </ion-col>
+      <ion-col size="6">
+        <ion-button color="tertiary" shape="round" expand="full">
+          <ion-icon name="trash-sharp"></ion-icon>Limpar
+        </ion-button>
+      </ion-col>
 
-      </ion-row>
+    </ion-row>
 
   </ion-card>
 </ion-content>
