@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms'
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-registro',
@@ -23,8 +24,9 @@ export class RegistroPage implements OnInit {
     senha: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}, {tipo: 'minlength', aviso: 'O campo deve ter no mínimo 6 dígitos'}],
     confirmeSenha: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}, {tipo: 'minlength', aviso: 'O campo deve ter no mínimo 6 dígitos'}],
   };
+  pessoa = {};
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private bd: StorageService) { }
 
   get nome(){
     return this.registerForm.get('nome');
@@ -49,4 +51,7 @@ export class RegistroPage implements OnInit {
   ngOnInit() {
   }
 
+  async salvar(){
+    this.bd.set('email', this.pessoa);
+  }
 }
