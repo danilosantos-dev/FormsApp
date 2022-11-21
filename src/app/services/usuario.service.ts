@@ -8,12 +8,25 @@ import { StorageService } from './storage.service';
 })
 export class UsuarioService {
 
-  listaUsuarios: Usuario[] = [
-
-  ];
+  listaUsuarios: Usuario[] = [];
 
   // Sempre declarar o servico no construtor "variavel: NomeDaClasse"
   constructor(private storageService : StorageService) {}
+
+  async login (email: string, senha: string){
+    this.buscarTodos();
+    let usuario : Usuario;
+    this.listaUsuarios.filter(item => {
+      if(item.email.toLocaleLowerCase() == email.toLocaleLowerCase()){
+        usuario = item;
+      }
+    });
+    if(usuario?.senha === senha){
+      return usuario;
+    }
+
+    return null;
+  }
 
   //salvar usurio dentro da lista de usuarios.
   async salvar(usuario:Usuario){
@@ -21,7 +34,11 @@ export class UsuarioService {
     await this.storageService.set('usuarios', this.listaUsuarios);
   }
 
-  async buscarUm(){}
+  // Traz todos os usuarios e busca um id especifico
+  async buscarUm(id: number){
+    this.buscarTodos();
+    return this.listaUsuarios[id];
+  }
 
   // "listaUsuarios recebe a busca por "usuarios" / "as unknown as Usuario[]" caso nao tenho nd retorne vazio ou o usuario "
   async buscarTodos(){
@@ -32,12 +49,17 @@ export class UsuarioService {
     return this.listaUsuarios;
   }
 
-  async deletar(){}
+  async deletar(id: number){
+    this.buscarTodos(); // Atualiza a lista de usuarios
+    this.listaUsuarios.slice(id, 1); // Remove o usuario do array
+    await this.storageService.set('usuarios',this.listaUsuarios); // Salva o array 
+  }
 
-  // Armazenamos o idUsuario 
+  // Armazenamos o idUsuario com o metodo 'set'
   async salvarId(id: number){
     await this.storageService.set('idUsuario', id);
   }
+
   //armazenamos nossa busca dentro de uma constante, e aplicamos uma condição para caso o id exista nos retorne ele.
   async buscarId(){
     const id =  await this.storageService.get('idUsuario');
@@ -46,6 +68,5 @@ export class UsuarioService {
     }
     return id;
   }
-
 }
 
