@@ -30,13 +30,14 @@ export class UsuarioService {
 
   //salvar usurio dentro da lista de usuarios.
   async salvar(usuario:Usuario){
+    await this.buscarTodos();
     this.listaUsuarios[usuario.id]= usuario;
     await this.storageService.set('usuarios', this.listaUsuarios);
   }
 
   // Traz todos os usuarios e busca um id especifico
   async buscarUm(id: number){
-    this.buscarTodos();
+    await this.buscarTodos();
     return this.listaUsuarios[id];
   }
 
@@ -44,13 +45,13 @@ export class UsuarioService {
   async buscarTodos(){
     this.listaUsuarios = await this.storageService.get('usuarios') as unknown as Usuario[];
     if(!this.listaUsuarios){
-      return [];
+      this.listaUsuarios = [];
     }
     return this.listaUsuarios;
   }
 
   async deletar(id: number){
-    this.buscarTodos(); // Atualiza a lista de usuarios
+   await this.buscarTodos(); // Atualiza a lista de usuarios
     this.listaUsuarios.slice(id, 1); // Remove o usuario do array
     await this.storageService.set('usuarios',this.listaUsuarios); // Salva o array 
   }

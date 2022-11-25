@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>produto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+  <ion-card class="card">
+    <form [formGroup]="produtoForm">
+      <ion-item color="medium">
+        <ion-input placeholder="Nome" formControlName="nome"></ion-input>
+      </ion-item>
+
+      <ng-container *ngFor="let erro of mensagensErro.nome">
+        <span class="msg-erro" *ngIf="nome.errors?.[erro.tipo] && (nome.dirty || nome.touched)">
+          {{erro.aviso}}
+        </span>
+      </ng-container>
+
+      <ion-item color="medium">
+        <ion-input placeholder="Descrição" formControlName="descricao"></ion-input>
+      </ion-item>
+
+      <ng-container *ngFor="let erro of mensagensErro.descricao">
+        <span class="msg-erro" *ngIf="descricao.errors?.[erro.tipo] && (descricao.dirty || descricao.touched)">
+          {{erro.aviso}}
+        </span>
+      </ng-container>
+
+      <ion-item color="medium">
+        <ion-input placeholder="Data de Validade" formControlName="datavalidade"></ion-input>
+      </ion-item>
+
+      <ng-container *ngFor="let erro of mensagensErro.datavalidade">
+        <span class="msg-erro" *ngIf="datavalidade.errors?.[erro.tipo] && (datavalidade.dirty || datavalidade.touched)">
+          {{erro.aviso}}
+        </span>
+      </ng-container>
+
+      <ion-item color="medium">
+        <ion-input type="number" placeholder="Preço" formControlName="preco">{{currency}}</ion-input>
+      </ion-item>
+
+      <ng-container *ngFor="let erro of mensagensErro.preco">
+        <span class="msg-erro" *ngIf="preco.errors?.[erro.tipo] && (preco.dirty || preco.touched)">
+          {{erro.aviso}}
+        </span>
+      </ng-container>
+
+    </form>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button color="tertiary" shape="round" expand="block" (click)="salvar()">Registrar</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+
+      <ion-col size="6">
+        <ion-button color="tertiary" shape="round" expand="full">
+          <ion-icon name="arrow-undo"></ion-icon>Voltar
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button color="tertiary" shape="round" expand="full">
+          <ion-icon name="trash-sharp"></ion-icon>Limpar
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-card>
+</ion-content>
