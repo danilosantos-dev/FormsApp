@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms'
 import { Router } from '@angular/router';
+import { Produto } from '../models/Produto.model';
+import { ProdutoService } from '../services/produto.service';
 import { StorageService } from '../services/storage.service';
 
 @Component({
@@ -13,28 +15,28 @@ export class ProdutoPage implements OnInit {
   produto: Produto = new Produto();
 
   produtoForm = this.formBuilder.group({
-    nome: ['', Validators.required],
-    descricao: ['', Validators.compose([Validators.required, Validators.email])],
-    datavalidade: ['',Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(11)])],
-    preco: ['',Validators.compose([Validators.required, Validators.minLength(6)])],    
+    nome: ['', Validators.compose([Validators.required,Validators.maxLength(30)])],
+    descricao: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
+    dataValidade: ['',Validators.required],
+    preco: ['',Validators.required],    
   });
 
   mensagensErro = {
-    nome: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}],
-    descricao: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}, {tipo: 'email', aviso: 'Digite um e-mail válido'}],
-    datavalidade: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}, {tipo: 'minlength', aviso: 'O campo deve conter 11 dígitos'}, {tipo: 'maxlength', aviso: 'O campo deve conter 11 dígitos'}],
-    preco: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}, {tipo: 'minlength', aviso: 'O campo deve ter no mínimo 6 dígitos'}],    
+    nome: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}, {tipo: 'maxlength', aviso: 'O campo deve conter no máximo 30 caracteres'}],
+    descricao: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}, {tipo: 'maxlength', aviso: 'O campo deve conter no máximo 50 caracteres'}],
+    dataValidade: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}],
+    preco: [{tipo: 'required', aviso: 'O campo não pode estar vazio'}],    
   };
   
-  constructor(private formBuilder: FormBuilder, private bd: StorageService, private route: Router) {}
+  constructor(private formBuilder: FormBuilder, private bd: StorageService, private route: Router, private produtoService: ProdutoService ) {}
   
   async salvar(){
     if (this.produtoForm.valid){
  
        this.produto.nome = this.produtoForm.get('nome').value;
-       this.produto.email = this.produtoForm.get('email').value;
-       this.produto.cpf = this.produtoForm.get('cpf').value;
-       this.produto.senha = this.produtoForm.get('senha').value;
+       this.produto.descricao = this.produtoForm.get('descricao').value;
+       this.produto.dataValidade = this.produtoForm.get('dataValidade').value;
+       this.produto.preco = this.produtoForm.get('preco').value;
  
        const id = await this.produtoService.buscarId() as number;
  
@@ -44,7 +46,7 @@ export class ProdutoPage implements OnInit {
  
        this.produtoService.salvarId(id + 1);
        alert('Sucesso !!');
-       this.route.navigateByUrl('/login');
+       this.route.navigateByUrl('/tabs/tab2');
  
     }else{
       alert('Formulario inválido!');
@@ -60,7 +62,7 @@ export class ProdutoPage implements OnInit {
    }
  
    get datavalidade(){
-     return this.produtoForm.get('datavalidade');
+     return this.produtoForm.get('dataValidade');
    }
  
    get preco(){

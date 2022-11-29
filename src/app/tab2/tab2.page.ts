@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Produto } from '../models/Produto.model';
+import { ProdutoService } from '../services/produto.service';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +9,17 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  listaProdutos: Produto[] = [];
+
+  constructor(private produtoService: ProdutoService) {}
+
+  async buscarProdutos(){
+    this.listaProdutos = await this.produtoService.buscarTodos();
+    console.log(this.listaProdutos);
+  } 
+
+  ionViewWillEnter() {
+    this.buscarProdutos();
+  }
 
 }

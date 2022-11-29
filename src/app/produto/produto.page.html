@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>produto</ion-title>
+  <ion-toolbar color="dark">
+    <ion-title class="titulo">Produto</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -27,12 +27,12 @@
         </span>
       </ng-container>
 
-      <ion-item color="medium">
-        <ion-input placeholder="Data de Validade" formControlName="datavalidade"></ion-input>
+      <ion-item color="light">
+        <ion-datetime color="dark" presentation="date" formControlName="dataValidade"><span slot="title"> Data de Validade </span> </ion-datetime>
       </ion-item>
 
       <ng-container *ngFor="let erro of mensagensErro.datavalidade">
-        <span class="msg-erro" *ngIf="datavalidade.errors?.[erro.tipo] && (datavalidade.dirty || datavalidade.touched)">
+        <span class="msg-erro" *ngIf="dataValidade.errors?.[erro.tipo] && (dataValidade.dirty || dataValidade.touched)">
           {{erro.aviso}}
         </span>
       </ng-container>
@@ -50,7 +50,7 @@
     </form>
     <ion-row>
       <ion-col size="12">
-        <ion-button color="tertiary" shape="round" expand="block" (click)="salvar()">Registrar</ion-button>
+        <ion-button color="tertiary" shape="round" expand="block" (click)="salvar()">Cadastrar Produto</ion-button>
       </ion-col>
     </ion-row>
 
