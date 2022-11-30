@@ -1,13 +1,11 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+  <ion-toolbar color="dark">
+    <ion-title class="titulo"> Lista de Produtos </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-item *ngFor="let produto of listaProdutos">
-    <ion-label>{{produto.nome}}</ion-label>
+<ion-content [fullscreen]="true" color="medium">
+  <ion-item color="dark" *ngFor="let prod of listaProdutos">
+    <ion-label>{{prod.nome}} - R$ {{prod.preco}}  </ion-label>
   </ion-item>  
 </ion-content>

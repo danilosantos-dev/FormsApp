@@ -1,13 +1,11 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+  <ion-toolbar color="dark">
+    <ion-title class="titulo"> Usuários Cadastrados </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-item *ngFor="let user of listaUsuarios">
+<ion-content [fullscreen]="true" color="medium" >
+  <ion-item color="dark" *ngFor="let user of listaUsuarios">
     <ion-label>{{user.nome}}</ion-label>
   </ion-item>  
 </ion-content>
